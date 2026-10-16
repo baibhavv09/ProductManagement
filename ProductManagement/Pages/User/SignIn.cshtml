@@ -1,0 +1,19 @@
+﻿@page
+@model ProductManagement.Pages.User.SignInModel
+@{
+}
+
+<h1>User Sign In</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Email">Email</label>
+        <input type="email" asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="Password">Password</label>
+        <input type="password" asp-for="Password" />
+    </div>
+    <button type="submit">Sign In</button>
+</form>
+<p>@Model.Message</p>
