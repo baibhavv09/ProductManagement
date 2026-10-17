@@ -25,7 +25,7 @@ namespace ProductManagement.Pages.User
 
             _db.user.Add(User);
             _db.SaveChanges();
-            return RedirectToPage("/SignIn");
+            return RedirectToPage("/User/SignIn");
         }
     }
 }
