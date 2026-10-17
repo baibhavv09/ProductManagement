@@ -11,5 +11,8 @@ namespace ProductManagement.Model
 
         public DbSet<UserModel> user { get; set; }
 
+        public DbSet<ProductModel> products { get; set; }
+
+
     }
 }

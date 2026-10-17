@@ -25,12 +25,12 @@ namespace ProductManagement.Pages.User
 
         public IActionResult OnPost()
         {
-            var res = _db.user.FirstOrDefault(u => u.Email == Email);
+            var res = _db.user.FirstOrDefault(u=> u.Email== Email);
             if (res!=null)
             {
                 if (res.Password == Password)
                 {
-                   return RedirectToPage("/Listing");
+                    return RedirectToPage("/Product/ProductListing");
                 }
                 else
                 {
