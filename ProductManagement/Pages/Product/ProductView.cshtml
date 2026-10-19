@@ -1,30 +1,235 @@
-﻿
-@page
+﻿@page
 @model ProductManagement.Pages.Product.ProductViewModel
 
-<h1>Product Details</h1>
-
-@if (Model.Product != null)
-{
-    <p><strong>Product ID:</strong> @Model.Product.Id</p>
-
-    <p><strong>Product Name:</strong>
-        @Model.Product.ProductName
-    </p>
-
-    <p><strong>Description:</strong>
-        @Model.Product.ProductDiscription
-    </p>
-
-    <p><strong>Price:</strong>
-        @Model.Product.Price.ToString("C")
-    </p>
-
-    <p><strong>Quantity:</strong>
-        @Model.Product.ProductQuantity
-    </p>
-
-    <a asp-page="/Product/ProductListing">
-        Back to Listing
-    </a>
+@{
+    ViewData["Title"] = "Product Details";
 }
+
+<style>
+    .details-container {
+        max-width: 750px;
+        margin: 45px auto;
+        padding: 20px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    .details-card {
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .details-header {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 28px 30px;
+    }
+
+    .details-header h1 {
+        margin: 0 0 8px;
+        font-size: 27px;
+    }
+
+    .details-header p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 14px;
+    }
+
+    .product-icon {
+        width: 55px;
+        height: 55px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin-bottom: 18px;
+    }
+
+    .details-body {
+        padding: 30px;
+    }
+
+    .detail-row {
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        gap: 15px;
+        padding: 17px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        color: #777;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .detail-value {
+        color: #333;
+        font-size: 15px;
+        font-weight: 500;
+        overflow-wrap: anywhere;
+    }
+
+    .product-id {
+        color: #667eea;
+        font-weight: 700;
+    }
+
+    .product-price {
+        color: #198754;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .details-footer {
+        padding: 20px 30px;
+        background: #f8f9fc;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 11px 18px;
+        border-radius: 7px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        transition: 0.2s;
+    }
+
+    .btn-back {
+        background: #e9ecef;
+        color: #444;
+    }
+
+    .btn-edit {
+        background: #667eea;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.88;
+        transform: translateY(-1px);
+    }
+
+    @@media (max-width: 600px) {
+        .details-container {
+            margin: 20px auto;
+            padding: 12px;
+        }
+
+        .details-header,
+        .details-body {
+            padding: 22px;
+        }
+
+        .detail-row {
+            grid-template-columns: 1fr;
+            gap: 7px;
+        }
+
+        .details-footer {
+            padding: 18px 22px;
+        }
+    }
+</style>
+
+<div class="details-container">
+
+    @if (Model.Product != null)
+    {
+        <div class="details-card">
+
+            <div class="details-header">
+                <div class="product-icon">📦</div>
+
+                <h1>Product Details</h1>
+
+                <p>View complete information about this product.</p>
+            </div>
+
+            <div class="details-body">
+
+                <div class="detail-row">
+                    <div class="detail-label">Product ID</div>
+                    <div class="detail-value product-id">
+                        #@Model.Product.Id
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Product Name</div>
+                    <div class="detail-value">
+                        @Model.Product.ProductName
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Description</div>
+                    <div class="detail-value">
+                        @Model.Product.ProductDiscription
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Price</div>
+                    <div class="detail-value product-price">
+                        @Model.Product.Price.ToString("C")
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Available Quantity</div>
+                    <div class="detail-value">
+                        @Model.Product.ProductQuantity units
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="details-footer">
+
+                <a asp-page="/Product/ProductListing"
+                   class="btn btn-back">
+                    ← Back to Listing
+                </a>
+
+                <a asp-page="/Product/ProductEdit"
+                   asp-route-id="@Model.Product.Id"
+                   class="btn btn-edit">
+                    ✎ Edit Product
+                </a>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="details-card">
+            <div class="details-body">
+                <h2>Product not found</h2>
+                <p>The requested product could not be found.</p>
+
+                <a asp-page="/Product/ProductListing"
+                   class="btn btn-back">
+                    ← Back to Listing
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
