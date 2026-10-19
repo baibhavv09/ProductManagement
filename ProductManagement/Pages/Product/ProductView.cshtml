@@ -1,0 +1,30 @@
+﻿
+@page
+@model ProductManagement.Pages.Product.ProductViewModel
+
+<h1>Product Details</h1>
+
+@if (Model.Product != null)
+{
+    <p><strong>Product ID:</strong> @Model.Product.Id</p>
+
+    <p><strong>Product Name:</strong>
+        @Model.Product.ProductName
+    </p>
+
+    <p><strong>Description:</strong>
+        @Model.Product.ProductDiscription
+    </p>
+
+    <p><strong>Price:</strong>
+        @Model.Product.Price.ToString("C")
+    </p>
+
+    <p><strong>Quantity:</strong>
+        @Model.Product.ProductQuantity
+    </p>
+
+    <a asp-page="/Product/ProductListing">
+        Back to Listing
+    </a>
+}

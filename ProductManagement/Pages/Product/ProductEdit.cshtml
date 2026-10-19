@@ -1,0 +1,153 @@
+﻿
+@page
+@model ProductManagement.Pages.Product.ProductEditModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<style>
+    .edit-container {
+        max-width: 650px;
+        margin: 40px auto;
+        padding: 30px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .edit-container h1 {
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .form-control {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 11px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 17px;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-save {
+        background: #667eea;
+    }
+
+    .btn-cancel {
+        background: #6c757d;
+        margin-left: 8px;
+    }
+
+    .validation {
+        color: #dc3545;
+        font-size: 13px;
+    }
+</style>
+
+<div class="edit-container">
+
+    <h1>Edit Product</h1>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="UserProduct.Id" />
+
+        <div asp-validation-summary="ModelOnly"
+             class="validation">
+        </div>
+
+        <div class="form-group">
+            <label asp-for="UserProduct.ProductName">
+                Product Name
+            </label>
+
+            <input asp-for="UserProduct.ProductName"
+                   class="form-control" />
+
+            <span asp-validation-for="UserProduct.ProductName"
+                  class="validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="UserProduct.ProductDiscription">
+                Product Description
+            </label>
+
+            <textarea asp-for="UserProduct.ProductDiscription"
+                      class="form-control"
+                      rows="4"></textarea>
+
+            <span asp-validation-for="UserProduct.ProductDiscription"
+                  class="validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="UserProduct.Price">
+                Price
+            </label>
+
+            <input asp-for="UserProduct.Price"
+                   type="number"
+                   step="0.01"
+                   min="0"
+                   class="form-control" />
+
+            <span asp-validation-for="UserProduct.Price"
+                  class="validation"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="UserProduct.ProductQuantity">
+                Product Quantity
+            </label>
+
+            <input asp-for="UserProduct.ProductQuantity"
+                   type="number"
+                   min="0"
+                   class="form-control" />
+
+            <span asp-validation-for="UserProduct.ProductQuantity"
+                  class="validation"></span>
+        </div>
+
+        <button type="submit" class="btn btn-save">
+            Save Changes
+        </button>
+
+        <a asp-page="/Product/ProductListing"
+           class="btn btn-cancel">
+            Cancel
+        </a>
+
+    </form>
+
+</div>
